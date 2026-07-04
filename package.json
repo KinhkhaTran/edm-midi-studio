@@ -1,0 +1,16 @@
+{
+  "name": "edm-midi-studio",
+  "version": "0.1.0",
+  "description": "Loopsmith — EDM MIDI generator with AI chat, audio preview, and Ableton-ready import/export",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "@tonejs/midi": "^2.0.28",
+    "express": "^4.21.2"
+  }
+}

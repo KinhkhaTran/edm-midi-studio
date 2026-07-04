@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Loopsmith — EDM MIDI Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800;900&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header id="transport">
+  <div class="brand">
+    <span class="brand-mark">▞▚</span>
+    <h1>LOOPSMITH</h1>
+  </div>
+
+  <div class="controls">
+    <label class="ctl">
+      <span>Genre</span>
+      <select id="genre"></select>
+    </label>
+    <label class="ctl">
+      <span>Key</span>
+      <select id="key"></select>
+    </label>
+    <label class="ctl">
+      <span>Scale</span>
+      <select id="scale"></select>
+    </label>
+    <label class="ctl">
+      <span>BPM</span>
+      <input id="tempo" type="number" min="60" max="200" value="124" />
+    </label>
+    <label class="ctl">
+      <span>Structure</span>
+      <select id="structure">
+        <option value="song" selected>Full track</option>
+        <option value="loop">Loop</option>
+      </select>
+    </label>
+    <label class="ctl" id="bars-ctl" hidden>
+      <span>Bars</span>
+      <select id="bars">
+        <option>4</option><option selected>8</option>
+      </select>
+    </label>
+    <button id="dice" class="icon-btn" title="Reroll seed">⚄</button>
+  </div>
+
+  <div class="actions">
+    <button id="generate" class="btn primary">Generate</button>
+    <button id="play" class="btn play" title="Play / stop (space)">▶</button>
+    <button id="render" class="btn render" title="Neural audio render via Stable Audio 2.5">✦ Render</button>
+    <button id="export-all" class="btn">Export .mid</button>
+    <button id="import" class="btn ghost">Import</button>
+    <input id="import-file" type="file" accept=".mid,.midi,audio/midi" hidden />
+  </div>
+</header>
+
+<main>
+  <section id="workspace" aria-label="Arrangement">
+    <div id="render-bar" hidden>
+      <span id="render-status" class="mono"></span>
+      <audio id="render-player" controls hidden></audio>
+      <a id="render-download" class="btn ghost" download hidden>⤓ audio</a>
+    </div>
+    <div id="timeline" hidden></div>
+    <section id="lanes" aria-label="Track lanes">
+    <div class="empty-hint" id="empty-hint">
+      <p>No patterns yet.</p>
+      <p>Pick a genre and hit <strong>Generate</strong> — or ask the AI for a starting point.</p>
+    </div>
+    </section>
+  </section>
+
+  <aside id="chat">
+    <div class="chat-head">
+      <h2>Resident&nbsp;Producer</h2>
+      <span id="chat-status" class="chat-status"></span>
+    </div>
+    <div id="chat-log" class="chat-log">
+      <div class="msg assistant">
+        <p>Tell me what you're going for — a genre, a mood, a reference track — and I'll build it. I can regenerate parts, write custom melodies and drum fills note-by-note, or change key and tempo.</p>
+      </div>
+    </div>
+    <form id="chat-form" class="chat-input">
+      <textarea id="chat-text" rows="2" placeholder="e.g. give me a dark rolling techno groove in F, then make the lead more sparse"></textarea>
+      <button type="submit" class="btn primary" id="chat-send">Send</button>
+    </form>
+  </aside>
+</main>
+
+<footer id="statusbar">
+  <span id="status-left" class="mono">ready</span>
+  <span id="status-right" class="mono"></span>
+</footer>
+
+<script src="https://unpkg.com/tone@14.8.49/build/Tone.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+node_modules/
+.env
+*.mid
+public/renders/
