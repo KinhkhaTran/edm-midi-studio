@@ -19,6 +19,5 @@ for (const opts of presets) {
   if (!stemCounts.lead || !stemCounts.guide) throw new Error(`${opts.genre} missing lead/guide notes`);
   const filename = `${opts.genre}-${opts.key.replace('#', 'sharp')}-${state.tempo}bpm-${opts.seed}.mid`;
   fs.writeFileSync(path.join(outDir, filename), stateToMidi(state));
-  fs.writeFileSync(path.join(outDir, filename.replace(/\.mid$/, '.json')), JSON.stringify({ ...state, tracks: state.tracks.map(t => ({ ...t, notes: t.notes.slice(0, 64) })) }, null, 2));
   console.log(`${filename} :: ${Object.entries(stemCounts).map(([k, v]) => `${k}:${v}`).join(' ')}`);
 }
