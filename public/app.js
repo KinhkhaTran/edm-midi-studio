@@ -6,7 +6,7 @@ const $ = (sel) => document.querySelector(sel);
 const TRACK_COLORS = {
   kick: '#f5a623', snare: '#e8842c', hats: '#d9c34a', perc: '#b0893a',
   sub: '#c23b5c', bass: '#f0506e', chords: '#38b6d9', pads: '#2f7fa8',
-  arp: '#58c98b', lead: '#a78bfa', counter: '#8a6fd6', fx: '#9aa0a8',
+  arp: '#58c98b', lead: '#a78bfa', guide: '#f2d27d', counter: '#8a6fd6', fx: '#9aa0a8',
   drums: '#f5a623',
 };
 const DRUM_TYPES = new Set(['kick', 'snare', 'hats', 'perc', 'drums']);
@@ -476,6 +476,15 @@ function buildEngine() {
   send(lead, pingpong, 0.2);
   send(lead, reverb, 0.2);
 
+  // --- Piano Hook Guide: intentionally plain so the idea transfers to Ableton. ---
+  const guide = new Tone.PolySynth(Tone.Synth, {
+    maxPolyphony: 8,
+    oscillator: { type: 'triangle' },
+    envelope: { attack: 0.006, decay: 0.35, sustain: 0.18, release: 0.28 },
+  }).connect(master);
+  guide.volume.value = -14;
+  send(guide, reverb, 0.14);
+
   // --- Counter: softer, panned, further back ---
   const counterPan = new Tone.Panner(0.35).connect(master);
   const counter = new Tone.PolySynth(Tone.Synth, {
@@ -495,7 +504,7 @@ function buildEngine() {
   const impact = new Tone.MembraneSynth({ pitchDecay: 0.1, octaves: 4, envelope: { attack: 0.001, decay: 1.4, sustain: 0 } }).connect(master);
   impact.volume.value = -4;
 
-  const melodic = { sub, chords, pads, arp, lead, counter };
+  const melodic = { sub, chords, pads, arp, lead, guide, counter };
 
   return {
     drumTrigger,

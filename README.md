@@ -17,12 +17,17 @@ Without `ANTHROPIC_API_KEY` everything works except the chat panel.
 
 ## What it does
 
-- **Composition engine** — house, deep house, techno, trance, progressive, dubstep, drum &
-  bass, future bass, trap. Motif-based melodies (A A' B A'' phrase structure, chord-tone
+- **Composition engine** — house, deep house, techno, trance, progressive, melodic house,
+  future rave, tech house, afro/organic house, dubstep, drum & bass, future bass, trap.
+  Motif-based melodies (A A' B A'' phrase structure, chord-tone
   targeting, climax placement, resolution), counter-melodies that answer in the lead's gaps,
   extended harmony (7ths/9ths/sus/add9/shell voicings) with real voice leading, bass
   archetypes with chromatic approach notes, swing/groove velocity maps. Seeded RNG: the same
   seed always reproduces the same track.
+- **Modern hook generator** — newer style presets write the chords first, use visible chord
+  tones as rails for the melody, repeat a two-bar hook, ornament connectors, place the climax
+  late, then resolve. Every modern preset also exports a **Piano Hook Guide** stem so you can
+  drag a simple piano melody into Ableton even before synth/sound design is finished.
 - **Full song arrangement** — intro → build → drop → break → build → drop → outro (72 bars)
   with per-section energy masks, accelerating snare rolls, risers, impacts, downlifters, and
   a counter-melody that only enters on the second drop. Or generate a plain loop.
@@ -59,7 +64,30 @@ the "how it could sound fully produced" reference.
 2. **Export .mid** (whole project) or `⤓ mid` on a single lane.
 3. Drag the file into Ableton — each track arrives as its own MIDI clip. Drums use GM
    pitches, so they map cleanly onto a Drum Rack.
-4. Swap the sketch synths for your own instruments and arrange.
+4. Start with **Piano Hook Guide** if you only need inspiration: put Ableton Piano/Keys on it,
+   then layer the Lead MIDI into Serum/Vital/stock Wavetable once the melody feels right.
+5. Swap the sketch synths for your own instruments and arrange.
+
+## Research notes baked into the generator
+
+This pass used current EDM production sources and YouTube transcripts as design constraints:
+
+- **EDM lead writing**: start by laying down the chord progression, then use the chord notes as
+  ghost notes/rails for the lead so the melody stays in key while still allowing flashy passing
+  notes and connectors. The hook should feel catchy through rhythm + repetition first, not just
+  random scale motion.
+- **Melodic house**: reference-track structure, 8-bar sections, four-on-the-floor kick, simple
+  long-note bass movement, nostalgic extended chords, arps, organic leads, delay/reverb space,
+  and percussion that grows after the core idea is established.
+- **Progressive/festival EDM**: detuned saw/add9/sus harmony, late-phrase climax notes, call and
+  response, and a clear resolution so the exported MIDI points you toward a usable drop lead.
+
+Useful commands:
+
+```sh
+npm test       # syntax checks + writes sample Ableton-ready MIDI files to exports/
+npm run samples
+```
 
 ## Architecture
 

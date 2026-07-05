@@ -6,7 +6,10 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node --watch server.js"
+    "dev": "node --watch server.js",
+    "check": "node --check server.js && node --check lib/theory.js && node --check lib/generators.js && node --check lib/midi.js",
+    "samples": "node scripts/generate-samples.mjs",
+    "test": "npm run check && npm run samples"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.39.0",
